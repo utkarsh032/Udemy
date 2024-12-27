@@ -5,12 +5,15 @@ import { NavMenu } from "./components/NavMenu";
 import OfferCard from "./components/OfferCard";
 import SignUpSystem from "./Auth/SignUpSystem";
 import BonusBanner from "./components/BonusBanner";
+import Foooter from "./components/Foooter";
+import { OneTop } from "./Content/OneTop";
 
 function Home() {
   return (
     <>
       <NavMenu />
       <BonusBanner />
+      <OneTop />
     </>
   );
 }
@@ -26,6 +29,7 @@ function App() {
           <Route path="/sign-up" element={<SignUpSystem />} />
         </Routes>
       </main>
+      <Foooter />
     </div>
   );
 }
