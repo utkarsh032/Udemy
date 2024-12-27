@@ -5,14 +5,13 @@ import { FaRegHeart } from "react-icons/fa6";
 import { FaOpencart } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
 
-
-
-
 export default function Navbar() {
   return (
     <div className='p-4 border-b'>
       <div className='flex items-center justify-between'>
-        <img src={Logo} width='7%' alt="Logo" className='h-auto' />
+        <Link to="/" className=''>
+          <img src={Logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
+        </Link>
 
         <Link className="text-md   transition-colors duration-200">Explore</Link>
 
@@ -40,7 +39,7 @@ export default function Navbar() {
           <IoNotificationsOutline />
         </Link>
 
-        <Link className="text-md   transition-colors duration-200">User</Link>
+        <Link to='sign-up' className="text-md   transition-colors duration-200">User</Link>
       </div>
     </div>
 
