@@ -1,17 +1,33 @@
-import './App.css'
-import BonusBanner from './components/BonusBanner'
-import Navbar from './components/Navbar'
-import OfferCard from './components/OfferCard'
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import { NavMenu } from "./components/NavMenu";
+import OfferCard from "./components/OfferCard";
+import SignUpSystem from "./Auth/SignUpSystem";
+import BonusBanner from "./components/BonusBanner";
+
+function Home() {
+  return (
+    <>
+      <NavMenu />
+      <BonusBanner />
+    </>
+  );
+}
 
 function App() {
   return (
-    <>
+    <div className="app">
       <OfferCard />
       <Navbar />
-      <BonusBanner />
-      <h1>Udemy</h1>
-    </>
-  )
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-up" element={<SignUpSystem />} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
