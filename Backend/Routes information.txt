@@ -1,0 +1,87 @@
+ domain = http://localhost:4600
+
+// it will send otp for email verification before signup
+ "/send-otp":
+    method - "post"
+    req - "email"
+    res - 
+      success- status(200)
+               message = "OTP has been send successfully"
+               OTP
+      
+      fails - status(400)    
+              message = "Something went wrong" 
+
+ const obj = {
+   email: email,
+   name : name,
+   password : password
+ }
+
+ fetch("http://localhost:4600/send-otp",{
+   method:"POST",
+   credentials: 'include',
+   body: JSON.stringify(obj)
+ })
+ .then((res)=>res.json())
+ .then((res)=>{
+   if(res.status == 200){
+      console.log(OTP has been send successfully)
+   }
+
+   res.OTP
+ })
+
+
+// it will signup user to the database
+ "/signup":
+   method - "post"
+   req - email , name, password
+   res - 
+      success - status(201)
+                message = "Signup successful"
+      fails - 
+         1. status(400)  
+            message = "user had signed up already"    
+         2. status(401)
+            message = "Invalid credentials"    
+
+
+
+// it will login user from database
+ "/login"
+   method - "post"
+   req - email, password
+   res - 
+     success - status(200) 
+               message = "login successful"
+     
+     fails - status(400)
+             message: "Incorrect email or password"     
+
+
+
+// for forgot password request
+"/forgot-password"               
+   method - "post"
+   req - email 
+   res - 
+     success - status(200)
+               message: "OTP has been send successfully",
+               OTP
+
+     fails - status(400)
+             message: "user not exist for this email"    
+
+
+
+// when user enter new password after forgot password route
+"/reset-password"               
+   method - "post"
+   req - password
+   res - 
+     success - status(200)
+               message: "Password updated successfully" 
+
+     fails - status(400)
+             message:"Otp was valid for only 5 minutes"       
