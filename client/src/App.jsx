@@ -7,12 +7,15 @@ import SignUpSystem from "./Auth/SignUpSystem";
 import BonusBanner from "./components/BonusBanner";
 import Foooter from "./components/Foooter";
 import { OneTop } from "./Content/OneTop";
+import { TopicsRecommended } from "./components/TopicRecommend";
+import CourseRecommend from "./Content/CourseRecommend";
 
 function Home() {
   return (
     <>
       <NavMenu />
       <BonusBanner />
+      <CourseRecommend />
       <OneTop />
     </>
   );
@@ -29,6 +32,7 @@ function App() {
           <Route path="/sign-up" element={<SignUpSystem />} />
         </Routes>
       </main>
+      <TopicsRecommended />
       <Foooter />
     </div>
   );
