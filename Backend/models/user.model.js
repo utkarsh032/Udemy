@@ -4,10 +4,15 @@ const userSchema = new Schema({
   email: String,
   name: String,
   password: String,
-  avatar: URL,
+  avatar: String,
   role: {
     type: String,
     enum: ["student", "instructor"],
+    default: "student",
+  },
+  cartItems: {
+    type: [Schema.Types.ObjectId],
+    ref: "course",
   },
   enrolledCourse: {
     type: [Schema.Types.ObjectId],

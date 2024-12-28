@@ -18,14 +18,14 @@ userRouter.post("/forgot-password", forgotPassword);
 
 userRouter.post("/reset-password", resetPassword);
 
-userRouter.use(checkForToken);
+userRouter.use("/auth/*",checkForToken);
 
-userRouter.get("/get-user-details", async(req, res) => {
+userRouter.get("/auth/get-user-details", async(req, res) => {
     const userId = req.user._id;
 
     const user = await User.findOne({ _id: userId });
             
-    res.status(200).json({name:user.name,email:user.email});
+    res.status(200).json({ name: user.name, email: user.email });
 })
 
 export { userRouter };
