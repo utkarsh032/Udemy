@@ -1,5 +1,5 @@
 import React from 'react';
-import { Courses } from '../Data/Courses.jsx';
+import { Courses } from '../Data/Courses';
 import { CoursePalette } from '../UI/Components/CoursePallete.jsx';
 
 export default function CourseRecommend() {
@@ -13,7 +13,7 @@ export default function CourseRecommend() {
           {Courses.slice(0, 4).map((course) => (
             <CoursePalette
               key={course.id}
-              {...course} // Spread props for simplicity
+              {...course}
             />
           ))}
         </div>
