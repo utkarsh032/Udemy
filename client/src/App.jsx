@@ -10,6 +10,8 @@ import { OneTop } from "./Content/OneTop";
 import { TopicsRecommended } from "./components/TopicRecommend";
 import CourseRecommend from "./Content/CourseRecommend";
 import { CoursePlaylist } from "./pages/CoursePlaylist/CoursePlaylist";
+import { UdemyBusiness } from "./components/UdemyBusiness";
+import { UdemyBusinessForm } from "./pages/CoursePlaylist/UdemyBusinessForm";
 
 function Home() {
   return (
@@ -19,6 +21,7 @@ function Home() {
       <NavMenu />
       <BonusBanner />
       <CourseRecommend />
+      <UdemyBusiness />
       <OneTop />
       <TopicsRecommended />
     </>
@@ -33,6 +36,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<SignUpSystem />} />
           <Route path="/course" element={<CoursePlaylist />} />
+          <Route path="/udemy-business/form" element={<UdemyBusinessForm />} />
         </Routes>
       </main>
       <Foooter />
