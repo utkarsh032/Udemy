@@ -9,14 +9,18 @@ import Foooter from "./components/Foooter";
 import { OneTop } from "./Content/OneTop";
 import { TopicsRecommended } from "./components/TopicRecommend";
 import CourseRecommend from "./Content/CourseRecommend";
+import { CoursePlaylist } from "./pages/CoursePlaylist/CoursePlaylist";
 
 function Home() {
   return (
     <>
+      <OfferCard />
+      <Navbar />
       <NavMenu />
       <BonusBanner />
       <CourseRecommend />
       <OneTop />
+      <TopicsRecommended />
     </>
   );
 }
@@ -24,15 +28,13 @@ function Home() {
 function App() {
   return (
     <div className="app">
-      <OfferCard />
-      <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<SignUpSystem />} />
+          <Route path="/course" element={<CoursePlaylist />} />
         </Routes>
       </main>
-      <TopicsRecommended />
       <Foooter />
     </div>
   );
