@@ -3,6 +3,7 @@ import { Schema, model } from "mongoose";
 const courseSchema = new Schema({
   uploadLink: String,
   title: String,
+  description: String,
   thumbnail: String,
   category: String,
   subCategory: String,
@@ -11,7 +12,7 @@ const courseSchema = new Schema({
   duration: String,
   notes: [String],
   createdBy: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: "user",
   },
   avgRating: Number,
