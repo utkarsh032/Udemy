@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { CoursePalette } from "../UI/Components/CoursePallete.jsx";
+import { useEffect, useState } from 'react'
+import { CoursePalette } from '../UI/Components/CoursePallete';
+import { Link } from 'react-router-dom';
 
-export default function CourseRecommend() {
+export default function LastSearched() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -13,12 +14,12 @@ export default function CourseRecommend() {
 
   return (
     <div className="p-8 m-10">
-      <h2 className="text-2xl font-bold mb-6">Recommended for you</h2>
+      <h2 className="text-2xl font-bold mb-6">Because you searched for <Link to='/' className='text-[#7e22ce]'>“Topics”</Link></h2>
       {courses.length === 0 ? (
         <p className="text-gray-500">No courses available at the moment.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-          {courses.slice(0, 4).map((course) => (
+          {courses.slice(5, 9).map((course) => (
             <CoursePalette
               key={course._id}
               title={course.title}
@@ -33,5 +34,5 @@ export default function CourseRecommend() {
         </div>
       )}
     </div>
-  );
+  )
 }

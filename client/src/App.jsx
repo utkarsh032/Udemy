@@ -9,6 +9,7 @@ import Foooter from "./components/Foooter";
 import { OneTop } from "./Content/OneTop";
 import { TopicsRecommended } from "./components/TopicRecommend";
 import CourseRecommend from "./Content/CourseRecommend";
+import LastSearched from "./Content/LastSearched";
 import { CoursePlaylist } from "./pages/CoursePlaylist/CoursePlaylist";
 import { UdemyBusiness } from "./components/UdemyBusiness";
 import { UdemyBusinessForm } from "./pages/CoursePlaylist/UdemyBusinessForm";
@@ -21,6 +22,7 @@ function Home() {
       <NavMenu />
       <BonusBanner />
       <CourseRecommend />
+      <LastSearched />
       <UdemyBusiness />
       <OneTop />
       <TopicsRecommended />
