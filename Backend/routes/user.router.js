@@ -1,4 +1,4 @@
-import { sendOtp, signUpUser, loginUser, forgotPassword, resetPassword, checkForToken } from "../controllers/user.controller.js";
+import { sendOtp, signUpUser, loginUser, forgotPassword, resetPassword, checkForToken, addToCart, showCartItems, addToWishlist, showWishlist } from "../controllers/user.controller.js";
 import { User } from "../models/user.model.js";
 import { Router } from "express";
 
@@ -16,17 +16,21 @@ userRouter.post("/login", loginUser);
 
 userRouter.post("/forgot-password", forgotPassword);
 
-userRouter.post("/reset-password", resetPassword);
-
-//userRouter.use("/auth/*",checkForToken);
+userRouter.post("/reset-password", resetPassword)
 
 
 userRouter.get("/auth/get-user-details", async (req, res) => {
+    console.log(req.user);
     const userId = req.user._id;
 
     const user = await User.findOne({ _id: userId });
 
     res.status(200).json({ name: user.name, email: user.email });
 })
+
+userRouter.post("/cart", checkForToken, addToCart);
+userRouter.get("/cart", checkForToken, showCartItems);
+userRouter.post("/wishlist", checkForToken, addToWishlist);
+userRouter.get("/wishlist", checkForToken, showWishlist);
 
 export { userRouter };

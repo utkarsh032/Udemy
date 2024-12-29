@@ -120,6 +120,10 @@ const loginUser = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
+        console.log(accessToken);
+        console.log(req.cookies.accessToken);
+        console.log(refreshToken);
+
         res.status(200).json({ message: "login successful" });
 
     } catch (error) {
@@ -205,10 +209,14 @@ const resetPassword = async (req, res) => {
 }
 
 const checkForToken = async (req, res, next) => {
-    const accessToken = req.cookies["accessToken"];
+    console.log("Enterd in tokenVarification.");
+
+    const accessToken = req.cookies.accessToken;
+    console.log(accessToken);
 
     if (accessToken) {
         try {
+            console.log("In the If Part")
             const decode = jwt.verify(accessToken, process.env.JWT_ACCESS_PASS);
 
             const user = await User.findOne({ _id: decode.id });
@@ -222,13 +230,16 @@ const checkForToken = async (req, res, next) => {
             res.status(401).json({ message: "Unauthorized Access" });
         }
     } else {
+        console.log("In the else Part")
         try {
             const refreshToken = req.cookies["refreshToken"];
+            console.log("refreshToken", refreshToken);
 
             if (!refreshToken) {
                 console.log("Neither Access nor Refresh token is present");
                 return res.status(401).json({ message: "Unauthorized Access" });
             }
+
 
             const decode = jwt.verify(refreshToken, process.env.JWT_REFRESH_PASS);
 
@@ -260,6 +271,138 @@ const checkForToken = async (req, res, next) => {
 
 }
 
+const addToCart = async (req, res) => {
+    try {
+        // Step:1 Take the courseId
+        // Step:2 get the user record by req.users
+        // Step:3 Check if this course is already present in the enrolledCourse array. if yes return enrolled
+        // Step:4 Check If the course is already in the add to cart.
+        // Step:5 add the courseId into the cartItems of the user record
+        // Step:6 Save the record
+
+        //Step : 1
+        const { courseId } = req.body;
+        console.log("req.users", courseId);
+
+        //Step : 2
+        const userId = req.user._id;
+        const user = req.user;
+
+        //Step : 3
+        const AlreadyPurchased = await User.findOne({
+            _id: userId,
+            cartItems: courseId // Checks if courseId exists in the enrolled array
+        });
+
+        if (AlreadyPurchased) {
+            return res.status(201).json({ msg: "Already Purchased." });
+        }
+
+        // Step : 4
+        const AlreadyInCart = await User.findOne({
+            _id: userId,
+            cartItems: courseId // Checks if courseId exists in the enrolled array
+        });
+
+        if (AlreadyInCart) {
+            return res.status(201).json({ msg: "Already Purchased." });
+        }
+
+        // Step : 5
+        user.cartItems.push(courseId);
+
+        // Step : 6 
+        user.save();
+
+        return res.status(201).json({ msg: "Added to Cart." });
+
+    } catch (error) {
+
+        return res.status(400).json({ error: error.message });
+
+    }
+}
+
+const showCartItems = async (req, res) => {
+    //
+    try {
+
+        const userId = req.user._id;
+
+        const cartData = await User.findOne({ _id: userId }).populate("cartItems");
+
+        return res.status(200).json(cartData.cartItems);
+
+    } catch (error) {
+
+        return res.status(400).json({ error: error.message });
+
+    }
+
+
+}
+
+const addToWishlist = async (req, res) => {
+    try {
+        // Step:1 Take the courseId
+        // Step:2 get the user record by req.users
+        // Step:4 Check If the course is already in wishlist.
+        // Step:5 add the courseId into the wishlist Array
+        // Step:6 Save the record
+
+        //Step : 1
+        const { courseId } = req.body;
+        console.log("req.users", courseId);
+
+        //Step : 2
+        const userId = req.user._id;
+        const user = req.user;
+
+        // Step : 4
+        const AlreadyInWishlist = await User.findOne({
+            _id: userId,
+            wishList: courseId // Checks if courseId exists in the enrolled array
+        });
+
+        if (AlreadyInWishlist) {
+            return res.status(201).json({ msg: "Already in wishList." });
+        }
+
+        // Step : 5
+        user.wishList.push(courseId);
+
+        // Step : 6 
+        user.save();
+
+        return res.status(201).json({ msg: "Added to Wishlist." });
+
+    } catch (error) {
+
+        return res.status(400).json({ error: error.message });
+
+    }
+}
+
+const showWishlist = async (req, res) => {
+    //
+    try {
+
+        const userId = req.user._id;
+
+        const cartData = await User.findOne({ _id: userId }).populate("wishList");
+
+        return res.status(200).json(cartData.wishList);
+
+    } catch (error) {
+
+        return res.status(400).json({ error: error.message });
+
+    }
+
+
+}
+
+
 export {
     sendOtp,
     signUpUser,
@@ -267,4 +410,8 @@ export {
     forgotPassword,
     resetPassword,
     checkForToken,
+    addToCart,
+    showCartItems,
+    addToWishlist,
+    showWishlist
 };

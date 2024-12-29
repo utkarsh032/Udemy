@@ -18,11 +18,11 @@ app.use(express.json());
 
 app.use(fileUpload({ useTempFiles: true }));
 
-app.use("/user",userRouter);
+app.use("/user", userRouter);
 
 app.use("/course", courseRouter);
 
 app.listen(PORT, async () => {
     await dbConnection();
-    console.log(`Server started at http://localhost:${PORT}`);
+    console.log(`Server started at http://localhost:${PORT} and https://udemy-j08o.onrender.com`);
 });

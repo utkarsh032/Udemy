@@ -29,7 +29,7 @@ const courseSchema = new Schema({
   duration: String,
   notes: [String],
   createdBy: {
-    type: [Schema.Types.ObjectId],
+    type: Schema.Types.ObjectId,
     ref: "user",
   },
   avgRating: Number,
