@@ -3,6 +3,7 @@ import { Schema, model } from "mongoose";
 // Lesson Schema for Section 
 const LessonSchema = new Schema({
   title: { type: String, required: true },
+  url: { type: String, require: true },
   duration: { type: String, required: true },
   completed: { type: Boolean, default: false },
   resources: { type: Boolean, default: false },
@@ -23,8 +24,8 @@ const courseSchema = new Schema({
   thumbnail: String,
   category: String,
   subCategory: String,
-  actualPrice: String,
-  salePrice: String,
+  actualPrice: Number,
+  salePrice: Number,
   duration: String,
   notes: [String],
   createdBy: {
