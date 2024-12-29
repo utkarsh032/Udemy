@@ -16,7 +16,7 @@ export default function Navbar() {
         <Link to="/" className="">
           <img src={Logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
         </Link>
-
+        <Link className="text-md transition-colors duration-200">Explore</Link>
         {/* Search Bar */}
         <div className="hidden md:flex items-center border border-gray-300 rounded-full text-md gap-2 w-1/2 bg-gray-50 shadow-sm">
           <IoMdSearch className="text-2xl mx-2 text-gray-600" />
@@ -28,9 +28,11 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link className="text-md transition-colors duration-200">Explore</Link>
           <Link className="text-md transition-colors duration-200">
             Udemy Business
+          </Link>
+          <Link to='/instructor' className="text-md transition-colors duration-200">
+            Instructor
           </Link>
           <Link className="text-md transition-colors duration-200">
             My Learning
