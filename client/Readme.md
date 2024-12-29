@@ -4,6 +4,10 @@ A feature-rich Udemy Clone built using React with Vite. This project replicates 
 
 ---
 
+### Cart Route
+![Course Route Screenshot](./src/assets/responsiveUdem.png)
+
+
 ## Features
 
 - User-friendly interface inspired by Udemy's design
