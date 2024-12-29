@@ -22,5 +22,4 @@ app.use(userRouter);
 app.listen(PORT, async () => {
     await dbConnection();
     console.log(`Server started at http://localhost:${PORT}`);
-})
-
+});

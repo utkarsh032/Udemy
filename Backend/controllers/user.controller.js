@@ -7,12 +7,12 @@ import "dotenv/config";
 const generateOtp = () => Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  auth: {
-    user: process.env.AUTH_USER,
-    pass: process.env.AUTH_USER_PASS,
-  },
+    host: "smtp.gmail.com",
+    port: 587,
+    auth: {
+        user: process.env.AUTH_USER,
+        pass: process.env.AUTH_USER_PASS,
+    },
 });
 
 const sendOtp = async (req, res) => {
@@ -22,11 +22,11 @@ const sendOtp = async (req, res) => {
         const OTP = generateOtp();
 
         await transporter.sendMail({
-          to: email,
-          from: "udemy@gmail.com",
-          subject: "OTP Verification for Udemy",
-          html:
-           `<p>OTP for Sign up on Udemy</p>
+            to: email,
+            from: "udemy@gmail.com",
+            subject: "OTP Verification for Udemy",
+            html:
+                `<p>OTP for Sign up on Udemy</p>
             <h2>${OTP}</h2>`,
         });
 
@@ -34,7 +34,7 @@ const sendOtp = async (req, res) => {
             message: "OTP has been send successfully",
             OTP
         });
-        
+
     } catch (error) {
         console.log(error.message);
         res.status(400).json({ message: "Something went wrong" });
@@ -45,7 +45,7 @@ const signUpUser = async (req, res) => {
     try {
         const { email, name, password } = req.body;
 
-        console.log(email,name,password);
+        console.log(email, name, password);
 
         const chechUser = await User.findOne({ email });
 
@@ -83,8 +83,8 @@ const loginUser = async (req, res) => {
         if (!user) {
             console.log("user is not present in database with this email");
             return res
-              .status(400)
-              .json({ message: "Incorrect email or password" });
+                .status(400)
+                .json({ message: "Incorrect email or password" });
         }
 
         const isValidUser = await argon2.verify(user.password, password);
@@ -95,29 +95,29 @@ const loginUser = async (req, res) => {
         }
 
         const accessToken = jwt.sign(
-          { id:user._id, name: user.name },
-          process.env.JWT_ACCESS_PASS,
-          { expiresIn: "1h" }
+            { id: user._id, name: user.name },
+            process.env.JWT_ACCESS_PASS,
+            { expiresIn: "1h" }
         );
 
         const refreshToken = jwt.sign(
-          { id: user._id, name: user.name },
-          process.env.JWT_REFRESH_PASS,
-          { expiresIn: "7d" }
+            { id: user._id, name: user.name },
+            process.env.JWT_REFRESH_PASS,
+            { expiresIn: "7d" }
         );
 
         res.cookie("accessToken", accessToken, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "strict",
-          maxAge: 60 * 60 * 1000, 
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+            maxAge: 60 * 60 * 1000,
         });
 
         res.cookie("refreshToken", refreshToken, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "strict",
-          maxAge: 7 * 24 * 60 * 60 * 1000, 
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
         res.status(200).json({ message: "login successful" });
@@ -129,48 +129,48 @@ const loginUser = async (req, res) => {
 }
 
 const forgotPassword = async (req, res) => {
-   try {
-       const { email } = req.body;
+    try {
+        const { email } = req.body;
 
-       const user = await User.findOne({ email });
+        const user = await User.findOne({ email });
 
-       if (!user) {
-           console.log("user is not present in database with this email");
-           return res
-             .status(400)
-             .json({ message: "user not exist for this email" });
-       }
+        if (!user) {
+            console.log("user is not present in database with this email");
+            return res
+                .status(400)
+                .json({ message: "user not exist for this email" });
+        }
 
-       const resetToken = jwt.sign({id:user._id, name: user.name }, process.env.JWT_RESET_PASS, { expiresIn: "5m" });
+        const resetToken = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_RESET_PASS, { expiresIn: "5m" });
 
-       const OTP = generateOtp();
+        const OTP = generateOtp();
 
-       await transporter.sendMail({
-         to: email,
-         from: "udemy@gmail.com",
-         subject: "Forgot Password OTP for Udemy",
-         html: `<p>OTP for Forgot Password on Udemy</p>
+        await transporter.sendMail({
+            to: email,
+            from: "udemy@gmail.com",
+            subject: "Forgot Password OTP for Udemy",
+            html: `<p>OTP for Forgot Password on Udemy</p>
             <P>This OTP is valid for 5 minutes.</p>
             <h2>${OTP}</h2>`,
-       });
-
-       res.cookie("resetToken", resetToken, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "strict",
-          maxAge: 5 * 60 * 1000,
         });
 
-       res.status(200).json({
-         message: "OTP has been send successfully",
-         OTP,
-       });
-       
-   } catch (error) {
-       console.log(error.message);
-       res.status(400).json(error.message);
-   }
-    
+        res.cookie("resetToken", resetToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+            maxAge: 5 * 60 * 1000,
+        });
+
+        res.status(200).json({
+            message: "OTP has been send successfully",
+            OTP,
+        });
+
+    } catch (error) {
+        console.log(error.message);
+        res.status(400).json(error.message);
+    }
+
 }
 
 const resetPassword = async (req, res) => {
@@ -182,8 +182,8 @@ const resetPassword = async (req, res) => {
         if (!resetToken) {
             console.log("reset token has been deleted from cookies");
             return res
-              .status(400)
-              .json({ message: "Otp was valid for only 5 minutes" });
+                .status(400)
+                .json({ message: "Otp was valid for only 5 minutes" });
         }
 
         const decode = jwt.verify(resetToken, process.env.JWT_RESET_PASS);
@@ -200,7 +200,7 @@ const resetPassword = async (req, res) => {
 
     } catch (error) {
         console.log("Invalid reset token");
-        res.status(400).json({message:"Something went wrong"});
+        res.status(400).json({ message: "Something went wrong" });
     }
 }
 
@@ -232,17 +232,18 @@ const checkForToken = async (req, res, next) => {
 
             const decode = jwt.verify(refreshToken, process.env.JWT_REFRESH_PASS);
 
+            console.log(decode);
             const newAccessToken = jwt.sign(
-              { id: decode.id, name: decode.name },
+                { id: decode.id, name: decode.name },
                 process.env.JWT_ACCESS_PASS,
-              { expiresIn: "1h" }
+                { expiresIn: "1h" }
             );
-            
+
             res.cookie("accessToken", newAccessToken, {
-              httpOnly: true,
-              secure: true,
-              sameSite: "strict",
-              maxAge: 60 * 60 * 1000,
+                httpOnly: true,
+                secure: true,
+                sameSite: "strict",
+                maxAge: 60 * 60 * 1000,
             });
 
             const user = await User.findOne({ _id: decode.id });
@@ -256,14 +257,14 @@ const checkForToken = async (req, res, next) => {
             res.status(401).json({ message: "Unauthorized Access" });
         }
     }
-    
+
 }
 
 export {
-  sendOtp,
-  signUpUser,
-  loginUser,
-  forgotPassword,
-  resetPassword,
-  checkForToken,
+    sendOtp,
+    signUpUser,
+    loginUser,
+    forgotPassword,
+    resetPassword,
+    checkForToken,
 };
