@@ -3,6 +3,7 @@ import { FaRegCirclePlay } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
 export const CoursePalette = ({
+  _id,
   title,
   author,
   rating,
@@ -11,8 +12,8 @@ export const CoursePalette = ({
   imageUrl,
   originalPrice,
 }) => {
-  const handleAddToCart = () => {
-    console.log(`Added ${title} to cart`);
+  const handleAddToCart = (_id) => {
+    console.log(_id);
   };
 
   return (
@@ -57,7 +58,7 @@ export const CoursePalette = ({
         <div className="mt-4 flex justify-between items-center gap-4">
           <button
             className="flex-1 px-4 py-2 hover:bg-[#7e22ce] text-white rounded bg-[#a855f7] transition-colors"
-            onClick={handleAddToCart}
+            onClick={() => handleAddToCart(_id)}
           >
             Add to cart
           </button>
