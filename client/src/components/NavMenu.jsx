@@ -109,7 +109,7 @@ export const NavMenu = () => {
               </Link>
               {hasSubcategories && (
                 <div className="absolute hidden group-hover:flex border border-gray-600 shadow-md z-10 mt-2 bg-black w-[100vh]">
-                  <div className="flex  px-4 py-2">
+                  <div className="flex px-4 py-2">
                     {navItems[item].map((subItem, subIndex) => (
                       <Link
                         key={subIndex}

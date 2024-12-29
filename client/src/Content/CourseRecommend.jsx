@@ -18,9 +18,10 @@ export default function CourseRecommend() {
         <p className="text-gray-500">No courses available at the moment.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-          {courses.slice(0, 4).map((course) => (
+          {courses.slice(0, 4).map((course, _id) => (
             <CoursePalette
               key={course._id}
+              _id={course._id}
               title={course.title}
               author="Unknown Author"
               rating={course.avgRating}
@@ -28,6 +29,7 @@ export default function CourseRecommend() {
               price={course.salePrice}
               originalPrice={course.actualPrice}
               imageUrl={course.thumbnail}
+              handleAddToCart={_id}
             />
           ))}
         </div>

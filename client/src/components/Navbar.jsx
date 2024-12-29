@@ -31,7 +31,7 @@ export default function Navbar() {
           <FaRegHeart />
         </Link>
 
-        <Link className="text-xl  transition-colors duration-200 ">
+        <Link to='/cart' className="text-xl  transition-colors duration-200 ">
           <FaOpencart className='' />
         </Link>
 

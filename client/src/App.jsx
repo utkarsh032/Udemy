@@ -13,12 +13,12 @@ import LastSearched from "./Content/LastSearched";
 import { CoursePlaylist } from "./pages/CoursePlaylist/CoursePlaylist";
 import { UdemyBusiness } from "./components/UdemyBusiness";
 import { UdemyBusinessForm } from "./pages/CoursePlaylist/UdemyBusinessForm";
+import { CartSection } from "./pages/cart/CartSection";
 
 function Home() {
   return (
     <>
       <OfferCard />
-      <Navbar />
       <NavMenu />
       <BonusBanner />
       <CourseRecommend />
@@ -33,11 +33,13 @@ function Home() {
 function App() {
   return (
     <div className="app">
+      <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<SignUpSystem />} />
           <Route path="/course" element={<CoursePlaylist />} />
+          <Route path='/cart' element={<CartSection />} />
           <Route path="/udemy-business/form" element={<UdemyBusinessForm />} />
         </Routes>
       </main>
