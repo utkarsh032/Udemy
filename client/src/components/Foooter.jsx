@@ -97,28 +97,32 @@ export default function Foooter() {
   return (
     <div>
       <footer className="bg-gray-900 text-white py-10">
-        <div className="container mx-auto px-6 ">
+        <div className="container mx-auto px-6">
 
-          <div className='border-b flex justify-between items-center'>
-            <div>
-              <p className='text-lg font-bold'>Top companies choose <Link className='text-[#d29ef4]' to='/'>Udemy Business</Link> to build in-demand career skills.</p>
+          {/* Top Companies Section */}
+          <div className='border-b flex flex-col sm:flex-row justify-between items-center'>
+            <div className='mb-6 sm:mb-0'>
+              <p className='text-lg font-bold'>
+                Top companies choose <Link className='text-[#d29ef4]' to='/'>Udemy Business</Link> to build in-demand career skills.
+              </p>
             </div>
 
-            <div className='flex gap-2 items-center'>
+            <div className='flex gap-4 items-center'>
               {
                 companyLogo.map((logo, index) => (
-                  <div key={index} className=''>
-                    <img src={logo} />
+                  <div key={index}>
+                    <img src={logo} className="h-8" alt={`Company logo ${index}`} />
                   </div>
                 ))
               }
             </div>
           </div>
 
+          {/* Explore Top Skills Section */}
           <h2 className="text-start text-2xl mb-8 font-bold">
             Explore top skills and certifications
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {Object.keys(footerItems).map((category) => (
               <div key={category} className="footer-column">
                 <h3 className="text-lg font-semibold mb-4">{category}</h3>
@@ -133,22 +137,23 @@ export default function Foooter() {
             ))}
           </div>
 
-          <div className='border-t my-2 py-2 flex justify-between items-center'>
-            <div className='flex items-center '>
+          {/* Footer Bottom Section */}
+          <div className='border-t my-2 py-4 flex flex-col sm:flex-row justify-between items-center'>
+            <div className='flex items-center'>
               <Link to="/" className=''>
                 <img src={LogoImg} alt="Logo" className="h-10 w-auto cursor-pointer" />
               </Link>
-              <p className='space-x-4'>© 2024 Udemy, Inc.</p>
+              <p className='space-x-4 mt-2 sm:mt-0'>© 2024 Udemy, Inc.</p>
             </div>
-            <p>Cookie Setting</p>
-            <p>English</p>
+            <div className='mt-2 sm:mt-0 flex gap-4'>
+              <p>Cookie Settings</p>
+              <p>English</p>
+            </div>
           </div>
 
         </div>
-
-
-
       </footer>
     </div>
+
   )
 }
