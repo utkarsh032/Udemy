@@ -1,3 +1,4 @@
+import { courseRouter } from "./routes/course.router.js";
 import { userRouter } from "./routes/user.router.js";
 import { dbConnection } from "./dbConnection.js";
 import fileUpload from "express-fileupload";
@@ -17,7 +18,9 @@ app.use(express.json());
 
 app.use(fileUpload({ useTempFiles: true }));
 
-app.use(userRouter);
+app.use("/user",userRouter);
+
+app.use("/course", courseRouter);
 
 app.listen(PORT, async () => {
     await dbConnection();

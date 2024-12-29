@@ -1,4 +1,4 @@
-import { sendOtp , signUpUser , loginUser , forgotPassword , resetPassword,checkForToken } from "../controllers/user.controller.js";
+import { sendOtp, signUpUser, loginUser, forgotPassword, resetPassword, checkForToken } from "../controllers/user.controller.js";
 import { User } from "../models/user.model.js";
 import { Router } from "express";
 
@@ -18,14 +18,15 @@ userRouter.post("/forgot-password", forgotPassword);
 
 userRouter.post("/reset-password", resetPassword);
 
-userRouter.use(checkForToken);
+//userRouter.use("/auth/*",checkForToken);
 
-userRouter.get("/get-user-details", async (req, res) => {
+
+userRouter.get("/auth/get-user-details", async (req, res) => {
     const userId = req.user._id;
 
     const user = await User.findOne({ _id: userId });
 
     res.status(200).json({ name: user.name, email: user.email });
-});
+})
 
 export { userRouter };
