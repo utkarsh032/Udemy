@@ -1,32 +1,44 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { MdNavigateNext } from "react-icons/md";
+
+const apiKey = 'ema_live_boPoby372oMu83YDIz9QK3SAh8Q96CMsstbsaBy8';
+const emailValidationUrl = "https://api.emailvalidation.io/v1/info";
+
 export const EmailForm = ({ onNext }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError("Invalid email format");
+      setLoading(false);
       return;
     }
 
     try {
-      const apiKey = 'ema_live_boPoby372oMu83YDIz9QK3SAh8Q96CMsstbsaBy8'
-      const apiUrl = `https://api.emailvalidation.io/v1/info?apikey=${apiKey}&email=${email}`;
+      // Constructing the API URL
+      const apiUrl = `${emailValidationUrl}?apikey=${apiKey}&email=${email}`;
+
+      // Making the request
       const response = await axios.get(apiUrl);
 
-      if (response.data.exists) {
+      // Check if the email is valid
+      if (response.data.format_valid && response.data.smtp_check) {
         onNext({ email });
       } else {
         setError("Email does not exist. Please try again.");
       }
     } catch (error) {
       setError("Error validating email. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,9 +64,11 @@ export const EmailForm = ({ onNext }) => {
         {error && <p className="text-red-500 italic text-sm">{error}</p>}
         <button
           type="submit"
+          disabled={loading}
           className="w-full flex items-center px-4 py-3 rounded-md bg-gradient-to-r from-[#A435F0] to-[#7A28C6] hover:from-[#7A28C6] hover:to-[#A435F0] text-white font-bold text-lg shadow-lg hover:shadow-xl transition duration-300"
         >
-          Next<MdNavigateNext />
+          {loading ? "Validating..." : "Next"}
+          {!loading && <MdNavigateNext />}
         </button>
       </form>
     </div>
