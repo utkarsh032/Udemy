@@ -16,6 +16,7 @@ import { UdemyBusinessForm } from "./pages/CoursePlaylist/UdemyBusinessForm";
 import { CartSection } from "./pages/cart/CartSection";
 import { Instructor } from "./pages/Instructor/Instructor";
 import { Create } from "./pages/Instructor/Create";
+import CourseGetCourse from "./pages/Course/CourseGetCourse";
 
 function Home() {
   return (
@@ -40,7 +41,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<SignUpSystem />} />
-          <Route path="/course" element={<CoursePlaylist />} />
+          <Route path="/course/learn" element={<CoursePlaylist />} />
+          <Route path="/course/get-courses/:id" element={<CourseGetCourse />} />
           <Route path='/cart' element={<CartSection />} />
           <Route path='/instructor' element={<Instructor />} />
           <Route path='/instructor/course' element={<Create />} />

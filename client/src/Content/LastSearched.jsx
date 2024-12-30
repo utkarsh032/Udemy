@@ -31,6 +31,7 @@ export default function LastSearched() {
               originalPrice={course.actualPrice}
               imageUrl={course.thumbnail}
               handleAddToCart={_id}
+              handleAddToWishlist={_id}
             />
           ))}
         </div>
