@@ -100,4 +100,7 @@ Included sample data for:
 ### Course Route
 ![Course Route Screenshot](./src/assets/coursePlayer.png)
 
+### Cart Route
+![Course Route Screenshot](./src/assets/cart.png)
+
 

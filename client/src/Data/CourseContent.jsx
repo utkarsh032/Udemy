@@ -1,5 +1,6 @@
 export const courseContent = {
   courseName: "Build fullstack React.js applications with Node.js, Express.js & MongoDB (MERN) with this project-focused course.",
+
   sections: [
     {
       sectionTitle: "Section 1: Introduction and Setup",
@@ -169,4 +170,5 @@ export const courseContent = {
       ],
     },
   ],
+
 };

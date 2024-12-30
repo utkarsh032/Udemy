@@ -1,6 +1,9 @@
-import React from "react";
+import { FaRegHeart } from "react-icons/fa";
+import { FaRegCirclePlay } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 export const CoursePalette = ({
+  _id,
   title,
   author,
   rating,
@@ -9,13 +12,18 @@ export const CoursePalette = ({
   imageUrl,
   originalPrice,
 }) => {
+  const handleAddToCart = (_id) => {
+    console.log(_id);
+  };
+
   return (
-    <div className="border p-4 hover:shadow-lg transition-shadow">
-      <div className="relative">
+    <div className="border p-4 transition-shadow">
+      <div className="relative group">
+        {/* Course Image */}
         <img
           src={imageUrl}
           alt={title}
-          className="w-full h-32 object-cover "
+          className="w-full h-32 object-cover"
         />
         <div className="absolute bottom-2 right-2 bg-white border-2 border-gray-200 rounded-full w-10 h-10">
           <img
@@ -24,7 +32,14 @@ export const CoursePalette = ({
             className="w-full h-full rounded-full"
           />
         </div>
+        <Link
+          to="/course"
+          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
+        >
+          <FaRegCirclePlay className="text-white text-5xl drop-shadow-lg" />
+        </Link>
       </div>
+
       <div className="mt-4">
         <h3 className="text-sm font-semibold text-gray-800 line-clamp-2">
           {title}
@@ -36,8 +51,22 @@ export const CoursePalette = ({
           <span className="text-gray-500">({reviews.toLocaleString()})</span>
         </div>
         <div className="flex gap-2 items-center mt-2">
-          <p className="text-base font-semibold ">₹{price}</p>
-          <p className="text-[#838383] text-sm line-through">₹{originalPrice}</p>
+          <p className="text-base font-semibold">{price}</p>
+          <p className="text-[#838383] text-sm line-through">{originalPrice}</p>
+        </div>
+
+        <div className="mt-4 flex justify-between items-center gap-4">
+          <button
+            className="flex-1 px-4 py-2 hover:bg-[#7e22ce] text-white rounded bg-[#a855f7] transition-colors"
+            onClick={() => handleAddToCart(_id)}
+          >
+            Add to cart
+          </button>
+          <button
+            className="border rounded-full h-10 w-10 border-gray-300 p-2 flex justify-center items-center hover:bg-gray-100 transition-colors"
+          >
+            <FaRegHeart className="text-gray-500 hover:text-red-500 transition-colors" />
+          </button>
         </div>
       </div>
     </div>
