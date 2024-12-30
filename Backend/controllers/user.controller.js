@@ -361,11 +361,12 @@ const addToWishlist = async (req, res) => {
         // Step : 4
         const AlreadyInWishlist = await User.findOne({
             _id: userId,
-            wishList: courseId // Checks if courseId exists in the enrolled array
+            wishList: courseId // Checks if courseId exists in the wishlist array
         });
 
         if (AlreadyInWishlist) {
-            return res.status(201).json({ msg: "Already in wishList." });
+            await user.updateOne({ $pull: { wishList: courseId } })
+            return res.status(201).json({ msg: "Already in wishList. So Removed It" });
         }
 
         // Step : 5
