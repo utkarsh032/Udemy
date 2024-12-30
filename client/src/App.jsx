@@ -17,6 +17,7 @@ import { CartSection } from "./pages/cart/CartSection";
 import { Instructor } from "./pages/Instructor/Instructor";
 import { Create } from "./pages/Instructor/Create";
 import CourseGetCourse from "./pages/Course/CourseGetCourse";
+import RecentWatch from "./components/RecentWatch";
 
 function Home() {
   return (
@@ -24,10 +25,11 @@ function Home() {
       <OfferCard />
       <NavMenu />
       <BonusBanner />
-      <CourseRecommend />
-      <LastSearched />
+      <RecentWatch />
       <UdemyBusiness />
+      <CourseRecommend />
       <OneTop />
+      <LastSearched />
       <TopicsRecommended />
     </>
   );
