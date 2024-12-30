@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use(fileUpload({ useTempFiles: true }));
 
-app.use("/user",userRouter);
+app.use("/user", userRouter);
 
 app.use("/course", courseRouter);
 

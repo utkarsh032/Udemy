@@ -1,10 +1,10 @@
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Api } from "../../context/Api";
 
 
 export const CoursePalette = ({
@@ -18,9 +18,11 @@ export const CoursePalette = ({
   originalPrice,
 }) => {
   const handleAddToCart = async (_id) => {
+
+    console.log(_id)
     try {
-      const payload = { productId: _id, quantity: 1 };
-      const response = await axios.post('/api/cart', payload);
+      const payload = { courseId: _id };
+      const response = await Api.post('/user/cart', payload);
 
       if (response.data.success) {
         toast.success('🦄 Added Successfully!', {
@@ -35,10 +37,10 @@ export const CoursePalette = ({
           transition: Bounce,
         });
       } else {
-        alert('Failed to add product to cart.');
+        alert('Failed to add to cart.');
       }
     } catch (error) {
-      toast.error('🦄 Added Failed!', {
+      toast.error('🦄 Add Failed!', {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -54,8 +56,8 @@ export const CoursePalette = ({
 
   const handleAddToWishlist = async (_id) => {
     try {
-      const payload = { productId: _id, quantity: 1 };
-      const response = await axios.post('/api/wishlist', payload);
+      const payload = { courseId: _id };
+      const response = await Api.post('/api/wishlist', payload);
 
       if (response.data.success) {
         toast.success('🦄 Added Successfully!', {
