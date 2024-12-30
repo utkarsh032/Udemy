@@ -15,6 +15,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+const otpStore = {};
+
 const sendOtp = async (req, res) => {
     try {
         const { email } = req.body;
@@ -30,6 +32,8 @@ const sendOtp = async (req, res) => {
             <h2>${OTP}</h2>`,
         });
 
+        otpStore[email] = OTP;
+
         res.status(200).json({
             message: "OTP has been send successfully",
             OTP
@@ -40,6 +44,19 @@ const sendOtp = async (req, res) => {
         res.status(400).json({ message: "Something went wrong" });
     }
 }
+
+const verifyOtp = (req, res) => {
+  const { email, code } = req.body;
+
+  if (otpStore[email] && otpStore[email] === Number(code)) {
+    delete otpStore[email];
+    return res
+      .status(200)
+      .json({ verified: true, message: "OTP verified successfully" });
+  }
+
+  res.status(400).json({ verified: false, message: "Invalid or expired OTP" });
+};
 
 const signUpUser = async (req, res) => {
     try {
@@ -285,34 +302,28 @@ const addToCart = async (req, res) => {
         console.log("req.users", courseId);
 
         //Step : 2
-        const userId = req.user._id;
         const user = req.user;
 
         //Step : 3
-        const AlreadyPurchased = await User.findOne({
-            _id: userId,
-            cartItems: courseId // Checks if courseId exists in the enrolled array
-        });
+        const AlreadyPurchased = user.enrolledCourse.includes(courseId);
 
         if (AlreadyPurchased) {
             return res.status(201).json({ msg: "Already Purchased." });
         }
 
         // Step : 4
-        const AlreadyInCart = await User.findOne({
-            _id: userId,
-            cartItems: courseId // Checks if courseId exists in the enrolled array
-        });
+        // Checks if courseId exists in the cartItems or not
+        const AlreadyInCart = user.cartItems.includes(courseId);
 
         if (AlreadyInCart) {
-            return res.status(201).json({ msg: "Already Purchased." });
+            return res.status(201).json({ msg: "Already present in Cart." });
         }
 
         // Step : 5
         user.cartItems.push(courseId);
 
         // Step : 6 
-        user.save();
+        await user.save();
 
         return res.status(201).json({ msg: "Added to Cart." });
 
@@ -346,23 +357,20 @@ const addToWishlist = async (req, res) => {
     try {
         // Step:1 Take the courseId
         // Step:2 get the user record by req.users
-        // Step:4 Check If the course is already in wishlist.
-        // Step:5 add the courseId into the wishlist Array
-        // Step:6 Save the record
+        // Step:3 Check If the course is already in wishlist.
+        // Step:4 add the courseId into the wishlist Array
+        // Step:5 Save the record
 
         //Step : 1
         const { courseId } = req.body;
         console.log("req.users", courseId);
 
         //Step : 2
-        const userId = req.user._id;
         const user = req.user;
 
-        // Step : 4
-        const AlreadyInWishlist = await User.findOne({
-            _id: userId,
-            wishList: courseId // Checks if courseId exists in the wishlist array
-        });
+        // Step : 3
+        // Checks if courseId exists in the wishlist array
+        const AlreadyInWishlist = user.wishList.includes(courseId);
 
         if (AlreadyInWishlist) {
             await user.updateOne({ $pull: { wishList: courseId } })
@@ -373,7 +381,7 @@ const addToWishlist = async (req, res) => {
         user.wishList.push(courseId);
 
         // Step : 6 
-        user.save();
+        await user.save();
 
         return res.status(201).json({ msg: "Added to Wishlist." });
 
@@ -406,6 +414,7 @@ const showWishlist = async (req, res) => {
 
 export {
     sendOtp,
+    verifyOtp,
     signUpUser,
     loginUser,
     forgotPassword,

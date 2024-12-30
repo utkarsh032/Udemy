@@ -1,8 +1,8 @@
 import { connect } from "mongoose";
 import "dotenv/config";
 
-const DB_URL = process.env.DB_URL
-console.log(process.env.PORT)
+const DB_URL = process.env.DB_URL;
+
 async function dbConnection() {
     try {
         await connect(DB_URL);

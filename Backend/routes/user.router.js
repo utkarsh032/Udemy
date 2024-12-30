@@ -1,4 +1,4 @@
-import { sendOtp, signUpUser, loginUser, forgotPassword, resetPassword, checkForToken, addToCart, showCartItems, addToWishlist, showWishlist } from "../controllers/user.controller.js";
+import { sendOtp, verifyOtp, signUpUser, loginUser, forgotPassword, resetPassword, checkForToken, addToCart, showCartItems, addToWishlist, showWishlist } from "../controllers/user.controller.js";
 import { User } from "../models/user.model.js";
 import { Router } from "express";
 
@@ -9,6 +9,8 @@ userRouter.get("/", (req, res) => {
 });
 
 userRouter.post("/send-otp", sendOtp);
+
+userRouter.post("/verify-otp", verifyOtp);
 
 userRouter.post("/signup", signUpUser);
 
@@ -36,3 +38,5 @@ userRouter.post("/wishlist", checkForToken, addToWishlist);
 userRouter.get("/wishlist", checkForToken, showWishlist);
 
 export { userRouter };
+
+

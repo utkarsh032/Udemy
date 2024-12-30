@@ -1,8 +1,9 @@
-import { Course } from "../models/course.model.js";
+import { CourseDescription } from "../models/courseDescription.model.js";
+import { CourseContent } from "../models/courseContent.model.js";
 
 const getAllCourses = async (req, res) => {
     try {
-        const courses = await Course.find();
+        const courses = await CourseDescription.find();
 
         res.status(200).json(courses);
     } catch (error) {
