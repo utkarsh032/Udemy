@@ -32,6 +32,7 @@ export default function CourseRecommend() {
               originalPrice={course.actualPrice}
               imageUrl={course.thumbnail}
               handleAddToCart={_id}
+              handleAddToWishlist={_id}
             />
           ))}
         </div>

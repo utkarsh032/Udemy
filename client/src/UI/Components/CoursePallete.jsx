@@ -1,6 +1,11 @@
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const CoursePalette = ({
   _id,
@@ -12,9 +17,75 @@ export const CoursePalette = ({
   imageUrl,
   originalPrice,
 }) => {
-  const handleAddToCart = (_id) => {
-    console.log(_id);
+  const handleAddToCart = async (_id) => {
+    try {
+      const payload = { productId: _id, quantity: 1 };
+      const response = await axios.post('/api/cart', payload);
+
+      if (response.data.success) {
+        toast.success('🦄 Added Successfully!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      } else {
+        alert('Failed to add product to cart.');
+      }
+    } catch (error) {
+      toast.error('🦄 Added Failed!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
   };
+
+  const handleAddToWishlist = async (_id) => {
+    try {
+      const payload = { productId: _id, quantity: 1 };
+      const response = await axios.post('/api/wishlist', payload);
+
+      if (response.data.success) {
+        toast.success('🦄 Added Successfully!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      } else {
+        alert('Failed to add product to cart.');
+      }
+    } catch (error) {
+      toast.error('🦄 Added Failed!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+  }
 
   return (
     <div className="border p-2 transition-shadow ">
@@ -33,7 +104,7 @@ export const CoursePalette = ({
           />
         </div>
         <Link
-          to="/course"
+          to={`/course/get-courses/${_id}`}
           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
         >
           <FaRegCirclePlay className="text-white text-4xl sm:text-5xl drop-shadow-lg" />
@@ -67,10 +138,11 @@ export const CoursePalette = ({
           <button
             className="border rounded-full h-10 w-10 border-gray-300 p-2 flex justify-center items-center hover:bg-gray-100 transition-colors"
           >
-            <FaRegHeart className="text-gray-500 hover:text-red-500 transition-colors" />
+            <FaRegHeart onClick={() => handleAddToWishlist(_id)} className="text-gray-500 hover:text-red-500 transition-colors" />
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
 
   );
