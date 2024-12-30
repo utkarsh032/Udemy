@@ -130,7 +130,7 @@ export const CoursePalette = ({
 
         <div className="mt-4 flex sm:flex-row justify-between items-center gap-2 sm:gap-4">
           <button
-            className="w-full sm:flex-1 px-4 py-2 hover:bg-[#7e22ce] text-white rounded bg-[#a855f7] transition-colors"
+            className="w-full sm:flex-1 px-4 py-2 bg-[#a855f7] hover:bg-[#7e22ce] text-white rounded  transition-colors"
             onClick={() => handleAddToCart(_id)}
           >
             Add to cart
