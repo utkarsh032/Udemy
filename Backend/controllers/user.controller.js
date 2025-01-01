@@ -36,7 +36,6 @@ const sendOtp = async (req, res) => {
 
         res.status(200).json({
             message: "OTP has been send successfully",
-            OTP
         });
 
     } catch (error) {
@@ -308,7 +307,7 @@ const addToCart = async (req, res) => {
         const AlreadyPurchased = user.enrolledCourse.includes(courseId);
 
         if (AlreadyPurchased) {
-            return res.status(201).json({ msg: "Already Purchased." });
+            return res.status(201).json({ message: "Already Purchased." });
         }
 
         // Step : 4
@@ -316,7 +315,9 @@ const addToCart = async (req, res) => {
         const AlreadyInCart = user.cartItems.includes(courseId);
 
         if (AlreadyInCart) {
-            return res.status(201).json({ msg: "Already present in Cart." });
+            return res
+              .status(201)
+              .json({ message: "Already present in Cart." });
         }
 
         // Step : 5
@@ -325,7 +326,7 @@ const addToCart = async (req, res) => {
         // Step : 6 
         await user.save();
 
-        return res.status(201).json({ msg: "Added to Cart." });
+        return res.status(201).json({ message: "Added to Cart." });
 
     } catch (error) {
 
@@ -374,7 +375,9 @@ const addToWishlist = async (req, res) => {
 
         if (AlreadyInWishlist) {
             await user.updateOne({ $pull: { wishList: courseId } })
-            return res.status(201).json({ msg: "Already in wishList. So Removed It" });
+            return res
+              .status(201)
+              .json({ message: "Already in wishList. So Removed It" });
         }
 
         // Step : 5
@@ -383,7 +386,7 @@ const addToWishlist = async (req, res) => {
         // Step : 6 
         await user.save();
 
-        return res.status(201).json({ msg: "Added to Wishlist." });
+        return res.status(201).json({ message: "Added to Wishlist." });
 
     } catch (error) {
 
