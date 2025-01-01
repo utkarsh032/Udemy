@@ -14,6 +14,10 @@ const userSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: "course",
   },
+  wishList: {
+    type: [Schema.Types.ObjectId],
+    ref: "course",
+  },
   enrolledCourse: {
     type: [Schema.Types.ObjectId],
     ref: "course",
