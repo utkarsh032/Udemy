@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 export const NavMenu = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState({});
+  const [menuOpen, setMenuOpen] = useState(false);
+
 
   const togglePopover = (category) => {
     setIsPopoverOpen((prevState) => ({
@@ -92,7 +94,34 @@ export const NavMenu = () => {
 
   return (
     <div className="border-b">
-      <div className="flex justify-center space-x-8 py-4">
+      {/* Mobile menu toggle button */}
+      <div className="flex justify-between items-center px-4 py-3 md:hidden">
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="text-gray-500 hover:text-purple-500 focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 5.25h16.5M3.75 12h16.5M3.75 18.75h16.5"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Desktop and expanded mobile menu */}
+      <div
+        className={`${menuOpen ? "block" : "hidden"
+          } md:flex justify-center space-x-8 py-4`}
+      >
         {Object.keys(navItems).map((item, index) => {
           const hasSubcategories = navItems[item].length > 0;
 
@@ -102,14 +131,17 @@ export const NavMenu = () => {
               className="relative group text-center text-sm font-medium"
             >
               <Link
-                to={`/${item.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`}
+                to={`/${item
+                  .toLowerCase()
+                  .replace(/ & /g, "-")
+                  .replace(/ /g, "-")}`}
                 className="hover:text-purple-500"
               >
                 {item}
               </Link>
               {hasSubcategories && (
-                <div className="absolute hidden group-hover:flex border border-gray-600 shadow-md z-10 mt-2 bg-black w-[100vh]">
-                  <div className="flex px-4 py-2">
+                <div className="absolute hidden group-hover:flex border border-gray-600 shadow-md z-10 mt-2 bg-black w-full md:w-[50vw]">
+                  <div className="grid grid-cols-1 md:grid-cols-2 px-4 py-2">
                     {navItems[item].map((subItem, subIndex) => (
                       <Link
                         key={subIndex}
