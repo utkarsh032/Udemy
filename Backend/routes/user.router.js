@@ -19,6 +19,7 @@ userRouter.post("/forgot-password", forgotPassword);
 
 userRouter.post("/reset-password", resetPassword)
 
+
 userRouter.get("/get-user-details", checkForToken,async (req, res) => {
     const user = req.user;
 

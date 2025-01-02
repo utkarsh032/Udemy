@@ -5,13 +5,15 @@ const PasswordForm = ({ data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password.length >= 6) {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
+    if (passwordRegex.test(password)) {
       alert("Account created successfully!");
       console.log({ ...data, password });
     } else {
-      alert("Password must be at least 6 characters.");
+      alert("Password must be at least 6 characters and include a number and special character.");
     }
   };
+
 
   return (
     <div className="container mx-auto px-6 py-10 flex flex-col items-center max-w-lg">

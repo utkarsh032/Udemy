@@ -5,14 +5,16 @@ export const FullNameForm = ({ onNext }) => {
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
-    if (fullName.trim().length > 0) {
-      onNext({ fullName });
+    const trimmedName = fullName.trim();
+    if (trimmedName.length > 0) {
+      onNext({ fullName: trimmedName });
     } else {
-      setError('Please enter your full name.')
+      setError('Please enter your full name.');
     }
   };
+
 
   return (
     <div className="container mx-auto px-6 py-10 flex flex-col items-center max-w-lg">
