@@ -13,18 +13,22 @@ const userSchema = new Schema({
   cartItems: {
     type: [Schema.Types.ObjectId],
     ref: "course",
+    default: [],
   },
   wishList: {
     type: [Schema.Types.ObjectId],
     ref: "course",
+    default: [],
   },
   enrolledCourse: {
     type: [Schema.Types.ObjectId],
     ref: "course",
+    default: [],
   },
   createdCourse: {
     type: [Schema.Types.ObjectId],
     ref: "course",
+    default: [],
   },
 });
 
