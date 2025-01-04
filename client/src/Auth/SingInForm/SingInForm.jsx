@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthPageAnimate from '../../assets/AuthUI.png';
 import axios from "axios";
 
-export default function SignInForm() {
+export const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,8 +22,15 @@ export default function SignInForm() {
         password
       }, { withCredentials: true });
 
+      // Store the user data in localStorage
+      const user = response.data.user; // Assuming your backend sends user data in response
+      localStorage.setItem("user", JSON.stringify(user)); // Save user data to localStorage
+
       alert(response.data.message || "Login successful!");
+
+      // Redirect to home or desired page after login
       navigate("/");
+
     } catch (err) {
       setError(err.response?.data?.message || "An error occurred while logging in.");
     } finally {

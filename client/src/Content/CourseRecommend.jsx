@@ -5,7 +5,7 @@ export default function CourseRecommend() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("https://udemy-j08o.onrender.com/course/get-courses")
+    fetch("https://udemy-j08o.onrender.com/course")
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
@@ -25,9 +25,9 @@ export default function CourseRecommend() {
               key={course._id}
               _id={course._id}
               title={course.title}
-              author="Unknown Author"
+              author={course.instructors}
               rating={course.avgRating}
-              reviews={course.reviews.length}
+              reviews={course.ratingCount}
               price={course.salePrice}
               originalPrice={course.actualPrice}
               imageUrl={course.thumbnail}

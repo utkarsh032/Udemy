@@ -75,7 +75,7 @@ export const CoursePalette = ({
         alert('Failed to add product to cart.');
       }
     } catch (error) {
-      toast.error('🦄 Added Failed!', {
+      toast.error('Error adding to cart', {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -124,7 +124,7 @@ export const CoursePalette = ({
           <span className="text-gray-500">({reviews.toLocaleString()})</span>
         </div>
         <div className="flex gap-2 items-center mt-2">
-          <p className="text-sm sm:text-base font-semibold">{price}</p>
+          <p className="text-sm sm:text-base font-semibold">₹{price}</p>
           <p className="text-xs sm:text-sm text-[#838383] line-through">
             {originalPrice}
           </p>
