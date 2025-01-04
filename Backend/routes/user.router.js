@@ -22,7 +22,7 @@ userRouter.post("/forgot-password", forgotPassword);
 userRouter.post("/reset-password", resetPassword)
 
 
-userRouter.get("/auth/get-user-details", checkForToken,async (req, res) => {
+userRouter.get("/auth/get-user-details", checkForToken, async (req, res) => {
 
     console.log(req.user);
     const userId = req.user._id;
