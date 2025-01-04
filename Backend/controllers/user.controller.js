@@ -318,8 +318,8 @@ const addToCart = async (req, res) => {
 
         if (AlreadyInCart) {
             return res
-              .status(201)
-              .json({ message: "Already present in Cart." });
+                .status(201)
+                .json({ message: "Already present in Cart." });
             return res.status(201).json({ msg: "Already present in Cart." });
         }
 
@@ -380,8 +380,8 @@ const addToWishlist = async (req, res) => {
         if (AlreadyInWishlist) {
             await user.updateOne({ $pull: { wishList: courseId } })
             return res
-              .status(201)
-              .json({ message: "Already in wishList. So Removed It" });
+                .status(201)
+                .json({ message: "Already in wishList. So Removed It" });
         }
 
         // Step : 5

@@ -42,7 +42,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/sign-up" element={<SignUpSystem />} />
+          <Route path="/signup" element={<SignUpSystem />} />
           <Route path="/course/learn" element={<CoursePlaylist />} />
           <Route path="/course/get-courses/:id" element={<CourseGetCourse />} />
           <Route path='/cart' element={<CartSection />} />
