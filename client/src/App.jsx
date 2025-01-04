@@ -18,6 +18,7 @@ import { Instructor } from "./pages/Instructor/Instructor";
 import { Create } from "./pages/Instructor/Create";
 import CourseGetCourse from "./pages/Course/CourseGetCourse";
 import RecentWatch from "./components/RecentWatch";
+import { SignInForm } from "./Auth/SingInForm/SingInForm";
 
 function Home() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUpSystem />} />
+          <Route path="/login" element={<SignInForm />} />
           <Route path="/course/learn" element={<CoursePlaylist />} />
           <Route path="/course/get-courses/:id" element={<CourseGetCourse />} />
           <Route path='/cart' element={<CartSection />} />

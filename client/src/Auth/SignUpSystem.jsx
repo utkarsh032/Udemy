@@ -4,6 +4,7 @@ import EmailVerification from './SignUpForm/EmailVerification';
 import PasswordForm from './SignUpForm/PasswordForm';
 import { EmailForm } from './SignUpForm/EmailForm';
 import { FullNameForm } from './SignUpForm/FullNameForm';
+import { Link } from 'react-router-dom';
 
 export default function SignUpSystem() {
 
@@ -31,8 +32,16 @@ export default function SignUpSystem() {
         {step === 2 && <EmailForm onNext={handleNextStep} />}
         {step === 3 && <EmailVerification data={userData} onNext={handleNextStep} />}
         {step === 4 && <PasswordForm data={userData} />}
-      </div>
 
+        <div className='text-center'>
+          <p className="text-gray-600">
+            Don't have an account?{" "}
+            <Link to="/login" className="text-[#A435F0] font-bold hover:underline">
+              Login
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
