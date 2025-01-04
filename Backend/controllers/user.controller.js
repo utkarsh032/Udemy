@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import argon2 from "argon2";
 import "dotenv/config";
 
-const generateOtp = () => Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+const generateOtp = () => Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -75,7 +75,7 @@ const signUpUser = async (req, res) => {
         const user = new User({
             name,
             email,
-            password: hashPassword
+            password: hashPassword,
         });
 
         await user.save();
