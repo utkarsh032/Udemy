@@ -46,7 +46,7 @@ export default function Navbar() {
           <Link className="text-xl transition-colors duration-200">
             <IoNotificationsOutline />
           </Link>
-          <Link to="sign-up" className="text-md transition-colors duration-200">
+          <Link to="signup" className="text-md transition-colors duration-200">
             User
           </Link>
         </div>
@@ -99,7 +99,7 @@ export default function Navbar() {
           <Link className="text-md transition-colors duration-200">
             <IoNotificationsOutline />
           </Link>
-          <Link to="sign-up" className="text-md transition-colors duration-200">
+          <Link to="signup" className="text-md transition-colors duration-200">
             User
           </Link>
         </div>
