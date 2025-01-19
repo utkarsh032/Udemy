@@ -6,7 +6,7 @@ A feature-rich Udemy Clone built using React with Vite. This project replicates 
 
 ### Cart Route
 
-![Course Route Screenshot](./client/src/assets/responsiveUdem.png)
+![Course Route Screenshot](./frontend/src/assets/responsiveUdem.png)
 
 ## Features
 
@@ -68,7 +68,7 @@ Serve the `dist` folder using any static file server.
 
 ## Home Page UI Preview
 
-![Home Page Preview](./client/src/assets/HomePage.png)
+![Home Page Preview](./frontend/src/assets/HomePage.png)
 
 Add a screenshot of your homepage UI in the `path-to-homepage-image.png` location or update the path with the actual image location.
 
@@ -111,8 +111,8 @@ Included sample data for:
 
 ### Course Route
 
-![Course Route Screenshot](./client/src/assets/coursePlayer.png)
+![Course Route Screenshot](./frontend/src/assets/coursePlayer.png)
 
 ### Cart Route
 
-![Course Route Screenshot](./client/src/assets/cart.png)
+![Course Route Screenshot](./frontend/src/assets/cart.png)
