@@ -5,8 +5,8 @@ A feature-rich Udemy Clone built using React with Vite. This project replicates 
 ---
 
 ### Cart Route
-![Course Route Screenshot](./src/assets/responsiveUdem.png)
 
+![Course Route Screenshot](./client/src/assets/responsiveUdem.png)
 
 ## Features
 
@@ -68,43 +68,51 @@ Serve the `dist` folder using any static file server.
 
 ## Home Page UI Preview
 
-![Home Page Preview](./src/assets/HomePage.png)
+![Home Page Preview](./client/src/assets/HomePage.png)
 
 Add a screenshot of your homepage UI in the `path-to-homepage-image.png` location or update the path with the actual image location.
 
 ---
 
 ### . **Course Route**
+
 - Defined a dedicated route for accessing course details.
 - Ensured proper integration with the backend to fetch and display course data.
 
 ### . **Course Navigation (CourseNav)**
+
 - Created a left sidebar for navigation through course sections.
 - Included responsive design for better usability.
 
 ### . **Course Video Player**
+
 - Integrated a video player for streaming course videos.
 - Added basic playback controls like play, pause, and seek.
 
 ### . **Course Content Section**
+
 - Designed a right sidebar to display the course content.
 - Implemented a list view for easy access to lessons and materials.
 
 ### . **Course Overview**
+
 - Developed an overview section to provide a summary of the course.
 - Displayed key details such as instructor, duration, and prerequisites.
 
 ## Sample Data
+
 Included sample data for:
+
 - Course sections
 - Video URLs
 - Lesson details
 
 ## Screenshots
+
 ### Course Route
-![Course Route Screenshot](./src/assets/coursePlayer.png)
+
+![Course Route Screenshot](./client/src/assets/coursePlayer.png)
 
 ### Cart Route
-![Course Route Screenshot](./src/assets/cart.png)
 
-
+![Course Route Screenshot](./client/src/assets/cart.png)
