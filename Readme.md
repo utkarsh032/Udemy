@@ -1,4 +1,4 @@
-# Udemy Clone
+# Udemy-Clone
 
 A feature-rich Udemy Clone built using React with Vite. This project replicates core functionalities of the Udemy platform, offering an interactive and responsive user interface for online course browsing, purchase, and management.
 
@@ -30,7 +30,7 @@ A feature-rich Udemy Clone built using React with Vite. This project replicates 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/udemy-clone.git
+   git clone git@github.com:utkarsh032/Udemy.git
    cd udemy-clone
    ```
 
