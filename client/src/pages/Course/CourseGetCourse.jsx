@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
-const newUrl = 'https://udemy-j08o.onrender.com/course/get-courses';
+const newUrl = 'https://udemy-j08o.onrender.com/course';
 
 export default function CourseGetCourse() {
   const { id } = useParams()

@@ -7,12 +7,11 @@ export const CartSection = () => {
   const [courses, setCourses] = useState([])
 
   useEffect(() => {
-    fetch('https://udemy-j08o.onrender.com/course/get-courses')
+    fetch('https://udemy-j08o.onrender.com/course')
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.log(error))
   }, [])
-
   return (
     <div className='flex justify-between '>
       <div className="w-full m-10">
@@ -29,10 +28,11 @@ export const CartSection = () => {
                 key={course._id}
                 _id={course._id}
                 title={course.title}
-                author="Unknown Author"
+                author={course.instructors}
                 rating={course.avgRating}
-                reviews={course.reviews.length}
+                reviews={course.ratingCount}
                 price={course.salePrice}
+                duration={course.duration}
                 originalPrice={course.actualPrice}
                 imageUrl={course.thumbnail}
                 handleAddToCart={_id}

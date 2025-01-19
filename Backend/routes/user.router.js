@@ -20,8 +20,15 @@ userRouter.post("/forgot-password", forgotPassword);
 userRouter.post("/reset-password", resetPassword)
 
 
+userRouter.get("/auth/get-user-details", checkForToken, async (req, res) => {
+
+    console.log(req.user);
+    const userId = req.user._id;
+
+    const user = await User.findOne({ _id: userId });
 userRouter.get("/get-user-details", checkForToken,async (req, res) => {
     const user = req.user;
+
 
     res.status(200).json(user);
 })
