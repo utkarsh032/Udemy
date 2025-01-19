@@ -5,11 +5,12 @@ import { FaTag } from "react-icons/fa6";
 export const CartPallete = ({
   _id,
   title,
-  author = "Unknown Author",
-  rating = 0,
-  reviews = 0,
+  author,
+  rating,
+  reviews,
   price,
   imageUrl,
+  duration,
   originalPrice,
 }) => {
   return (
@@ -20,7 +21,7 @@ export const CartPallete = ({
 
         <div className="flex-1">
           <p className="text-lg font-semibold">{title}</p>
-          <p className="text-sm text-gray-500">by {author}</p>
+          <p className="text-sm text-gray-500">{author}</p>
           <div className="flex items-center gap-1 mt-2 text-yellow-500 text-sm">
             <span className="font-bold">{rating}</span>
             <span>★</span>
@@ -28,8 +29,8 @@ export const CartPallete = ({
           </div>
 
           <div className="mt-2 text-sm text-gray-600">
-            <span className="mr-4">10 total hours</span>
-            <span className="mr-4">51 lectures</span>
+            <span className="mr-4">{duration}</span>
+            <span className="mr-4">Lectures</span>
             <span>Beginner</span>
           </div>
         </div>
@@ -41,7 +42,7 @@ export const CartPallete = ({
         </div>
 
         <div className="flex flex-col items-end ml-6">
-          <p className="text-lg font-bold text-[#7e22ce] flex items-center gap-1">{price}<FaTag className="mt-1" /></p>
+          <p className="text-lg font-bold text-[#7e22ce] flex items-center gap-1">₹{price}<FaTag className="mt-1" /></p>
         </div>
 
       </div>
