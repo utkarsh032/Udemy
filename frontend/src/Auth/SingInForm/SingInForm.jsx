@@ -9,31 +9,43 @@ export const SignInForm = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const API_URL = 'https://udemy-1-bd7n.onrender.com'
+
   const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     setError("");
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8400/user/login", {
+      const response = await axios.post(`${API_URL}/user/login`, {
         email,
         password
       }, { withCredentials: true });
       console.log(response)
 
       // Store the user data in localStorage
-      const user = response.data.user; // Assuming your backend sends user data in response
-      localStorage.setItem("user", JSON.stringify(user)); // Save user data to localStorage
-
-      alert(response.data.message || "Login successful!");
+      const user = response.data.user;
+      console.log(user)
+      try {
+        localStorage.setItem("user", JSON.stringify(user)); // Save user data to localStorage
+        alert(response.data.message || "Login successful!");
+      } catch (error) {
+        setError(error.response?.data?.message || "An error occurred during login.");
+        console.error("Failed to save user to localStorage:", error);
+      }
 
       // Redirect to home or desired page after login
       navigate("/");
 
     } catch (err) {
       setError(err.response?.data?.message || "An error occurred while logging in.");
+      console.error(err)
     } finally {
       setLoading(false);
     }

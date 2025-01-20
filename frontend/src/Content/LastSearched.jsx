@@ -6,7 +6,7 @@ export default function LastSearched() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("https://udemy-j08o.onrender.com/course")
+    fetch("https://udemy-1-bd7n.onrender.com/course")
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
