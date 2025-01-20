@@ -18,7 +18,7 @@ export const CoursePalette = ({
 }) => {
   const [loadingCart, setLoadingCart] = useState(false);
   const [loadingWishlist, setLoadingWishlist] = useState(false);
-  
+
   const newURL = 'https://udemy-1-bd7n.onrender.com'
 
   const handleAddToCart = async (_id) => {
