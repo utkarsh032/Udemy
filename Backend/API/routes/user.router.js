@@ -21,11 +21,8 @@ userRouter.post("/reset-password", resetPassword);
 // Get user details
 userRouter.get("/auth/get-user-details", checkForToken, async (req, res) => {
     try {
-        const userId = req.user._id;
-        const user = await User.findOne({ _id: userId });
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
+        const user = req.user;
+
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: "Error fetching user details", error });
