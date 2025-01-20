@@ -12,7 +12,7 @@ export default function OfferCard() {
   const offerDetails = [
     {
       price: 449,
-      dueDate: "2024-12-31T20:59:59"
+      dueDate: "2025-12-31T20:59:59"
     }
   ];
 
