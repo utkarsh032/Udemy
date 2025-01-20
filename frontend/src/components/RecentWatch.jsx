@@ -20,7 +20,7 @@ export default function RecentWatch() {
   };
 
   useEffect(() => {
-    fetch('https://udemy-j08o.onrender.com/course')
+    fetch('https://udemy-1-bd7n.onrender.com/course')
       .then((response) => response.json())
       .then((data) => setMyCourse(data))
       .catch((error) => console.log(error));

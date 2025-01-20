@@ -3,9 +3,8 @@ import { FaRegCirclePlay } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Api } from "../../context/Api";
-
+import { useState } from "react";
 
 export const CoursePalette = ({
   _id,
@@ -17,15 +16,19 @@ export const CoursePalette = ({
   imageUrl,
   originalPrice,
 }) => {
-  const handleAddToCart = async (_id) => {
+  const [loadingCart, setLoadingCart] = useState(false);
+  const [loadingWishlist, setLoadingWishlist] = useState(false);
+  
+  const newURL = 'https://udemy-1-bd7n.onrender.com'
 
-    console.log(_id)
+  const handleAddToCart = async (_id) => {
+    setLoadingCart(true);
     try {
       const payload = { courseId: _id };
-      const response = await Api.post('/user/cart', payload);
+      const response = await Api.post(`${newURL}/user/cart`, payload);
 
       if (response.data.success) {
-        toast.success('🦄 Added Successfully!', {
+        toast.success('🦄 Added to Cart Successfully!', {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -37,57 +40,53 @@ export const CoursePalette = ({
           transition: Bounce,
         });
       } else {
-        alert('Failed to add to cart.');
+        toast.error(`Failed to add to cart: ${response.data.message || "Unknown error"}`, {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "colored",
+        });
       }
     } catch (error) {
-      toast.error('🦄 Add Failed!', {
+      toast.error(`Error: ${error.message || "Something went wrong"}`, {
         position: "top-right",
         autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "colored",
-        transition: Bounce,
       });
+    } finally {
+      setLoadingCart(false);
     }
   };
 
   const handleAddToWishlist = async (_id) => {
+    setLoadingWishlist(true);
     try {
       const payload = { courseId: _id };
       const response = await Api.post('/api/wishlist', payload);
 
       if (response.data.success) {
-        toast.success('🦄 Added Successfully!', {
+        toast.success('🦄 Added to Wishlist Successfully!', {
           position: "top-right",
           autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
           theme: "colored",
           transition: Bounce,
         });
       } else {
-        alert('Failed to add product to cart.');
+        toast.error(`Failed to add to wishlist: ${response.data.message || "Unknown error"}`, {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "colored",
+        });
       }
     } catch (error) {
-      toast.error('Error adding to cart', {
+      toast.error(`Error: ${error.message || "Something went wrong"}`, {
         position: "top-right",
         autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "colored",
-        transition: Bounce,
       });
+    } finally {
+      setLoadingWishlist(false);
     }
-  }
+  };
 
   return (
     <div className="border p-2 transition-shadow ">
@@ -132,20 +131,22 @@ export const CoursePalette = ({
 
         <div className="mt-4 flex sm:flex-row justify-between items-center gap-2 sm:gap-4">
           <button
-            className="w-full sm:flex-1 px-4 py-2 bg-[#a855f7] hover:bg-[#7e22ce] text-white rounded  transition-colors"
+            className={`w-full sm:flex-1 px-4 py-2 ${loadingCart ? "bg-gray-400" : "bg-[#a855f7] hover:bg-[#7e22ce]"} text-white rounded transition-colors`}
             onClick={() => handleAddToCart(_id)}
+            disabled={loadingCart}
           >
-            Add to cart
+            {loadingCart ? "Adding..." : "Add to cart"}
           </button>
           <button
-            className="border rounded-full h-10 w-10 border-gray-300 p-2 flex justify-center items-center hover:bg-gray-100 transition-colors"
+            className={`border rounded-full h-10 w-10 border-gray-300 p-2 flex justify-center items-center ${loadingWishlist ? "bg-gray-100" : "hover:bg-gray-100"} transition-colors`}
+            onClick={() => handleAddToWishlist(_id)}
+            disabled={loadingWishlist}
           >
-            <FaRegHeart onClick={() => handleAddToWishlist(_id)} className="text-gray-500 hover:text-red-500 transition-colors" />
+            <FaRegHeart className={`${loadingWishlist ? "text-gray-300" : "text-gray-500 hover:text-red-500"} transition-colors`} />
           </button>
         </div>
       </div>
       <ToastContainer />
     </div>
-
   );
 };
