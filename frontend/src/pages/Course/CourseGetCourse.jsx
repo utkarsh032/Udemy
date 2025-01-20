@@ -8,7 +8,7 @@ export default function CourseGetCourse() {
   const [getCourse, setGetCourse] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
-  console.log(id)
+  console.log(`course id : ${id}`)
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -26,7 +26,15 @@ export default function CourseGetCourse() {
     fetchCourse()
   }, [id])
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>data</div>
+    <div>{id}</div>
   )
 }

@@ -31,11 +31,11 @@ const getCourse = async (req, res) => {
 
         if (user.enrolledCourse.includes(courseId)) {
             const course = await CourseDescription.findOne({
-              _id: courseId,
+                _id: courseId,
             }).populate("courseContent");
-            
+
             return res.status(200).json({ course });
-        } 
+        }
 
         const course = await CourseDescription.findOne({ _id: courseId }).populate("createdBy").populate("reviews");
 

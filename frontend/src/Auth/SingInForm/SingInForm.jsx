@@ -17,10 +17,11 @@ export const SignInForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://udemy-j08o.onrender.com/user/login", {
+      const response = await axios.post("http://localhost:8400/user/login", {
         email,
         password
       }, { withCredentials: true });
+      console.log(response)
 
       // Store the user data in localStorage
       const user = response.data.user; // Assuming your backend sends user data in response
@@ -84,7 +85,7 @@ export const SignInForm = () => {
         </form>
         <p className="mt-4 text-gray-600">
           Don't have an account?{" "}
-          <Link href="/signup" className="text-[#A435F0] font-bold hover:underline">
+          <Link to="/signup" className="text-[#A435F0] font-bold hover:underline">
             Sign Up
           </Link>
         </p>

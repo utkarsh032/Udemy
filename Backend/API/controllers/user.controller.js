@@ -98,9 +98,7 @@ const loginUser = async (req, res) => {
 
         if (!user) {
             console.log("user is not present in database with this email");
-            return res
-                .status(400)
-                .json({ message: "Incorrect email or password" });
+            return res.status(400).json({ message: "Incorrect email or password" });
         }
 
         const isValidUser = await argon2.verify(user.password, password);
@@ -140,7 +138,7 @@ const loginUser = async (req, res) => {
         console.log(req.cookies.accessToken);
         console.log(refreshToken);
 
-        res.status(200).json({ message: "login successful" });
+        res.status(200).json({ message: "login successful", user: user });
 
     } catch (error) {
         console.log(error.message);
