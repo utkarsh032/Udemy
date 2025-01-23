@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CartPallete } from '../../UI/Components/cartPallete'
 import { Link } from 'react-router-dom'
-import { CheckOutCart } from './checkOutCart'
+import { CheckOutCart } from './CheckOutCart'
 
 export const CartSection = () => {
   const [courses, setCourses] = useState([])
