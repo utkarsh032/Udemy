@@ -1,13 +1,12 @@
 import { courseRouter } from "./API/routes/course.router.js";
-import { dbConnection } from "./API/config/dbConnection.js";
 import { userRouter } from "./API/routes/user.router.js";
 import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import { dbConnection } from "./API/config/dbConnection.js";
 import path from "path";
+import { dbConnection } from "./API/config/dbConnection.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -45,6 +44,7 @@ app.use(fileUpload({ useTempFiles: true }));
 app.use("/user", userRouter);
 
 app.use("/course", courseRouter);
+
 
 
 app.listen(PORT, async () => {
