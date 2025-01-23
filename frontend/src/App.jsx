@@ -13,12 +13,12 @@ import LastSearched from "./Content/LastSearched";
 import { CoursePlaylist } from "./pages/CoursePlaylist/CoursePlaylist";
 import { UdemyBusiness } from "./components/UdemyBusiness";
 import { UdemyBusinessForm } from "./pages/CoursePlaylist/UdemyBusinessForm";
-import { CartSection } from "./pages/cart/CartSection";
 import { Instructor } from "./pages/Instructor/Instructor";
 import { Create } from "./pages/Instructor/Create";
 import CourseGetCourse from "./pages/Course/CourseGetCourse";
 import RecentWatch from "./components/RecentWatch";
 import { SignInForm } from "./Auth/SingInForm/SingInForm";
+import { CartSection } from "./pages/cart/cartSection";
 
 function Home() {
   return (
