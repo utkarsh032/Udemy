@@ -1,4 +1,5 @@
 import { courseRouter } from "./API/routes/course.router.js";
+import { dbConnection } from "./API/config/dbConnection.js";
 import { userRouter } from "./API/routes/user.router.js";
 import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
@@ -7,7 +8,6 @@ import cors from "cors";
 import "dotenv/config";
 import { dbConnection } from "./API/config/dbConnection.js";
 import path from "path";
-
 
 const app = express();
 const PORT = process.env.PORT;
@@ -49,5 +49,5 @@ app.use("/course", courseRouter);
 
 app.listen(PORT, async () => {
     await dbConnection();
-    console.log(`Server started at PORT: ${PORT} and LIVE: https://udemy-j08o.onrender.com`);
+    console.log(`Server started at PORT: ${PORT}`);
 });
