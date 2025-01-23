@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CartPallete } from '../../UI/Components/cartPallete'
 import { Link } from 'react-router-dom'
 import { CheckOutCart } from './checkOutCart'
