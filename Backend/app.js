@@ -1,4 +1,5 @@
 import { courseRouter } from "./API/routes/course.router.js";
+import { dbConnection } from "./API/config/dbConnection.js";
 import { userRouter } from "./API/routes/user.router.js";
 import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
@@ -6,16 +7,20 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import path from "path";
-import { dbConnection } from "./API/config/dbConnection.js";
 
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}));
+const frontendUrl = "https://udemy-e-learning.netlify.app";
 
+const corsOptions = {
+  origin: frontendUrl,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
