@@ -9,7 +9,7 @@ export const SignInForm = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_URL = 'https://udemy-1-bd7n.onrender.com'
+  const API_URL = 'https://udemy-n59k.onrender.com/'
 
   const navigate = useNavigate();
 
