@@ -14,10 +14,10 @@ const PORT = process.env.PORT || 4999;
 const frontendUrl = "https://udemy-e-learning.netlify.app";
 
 const corsOptions = {
-  origin: frontendUrl,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
+    origin: frontendUrl,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
