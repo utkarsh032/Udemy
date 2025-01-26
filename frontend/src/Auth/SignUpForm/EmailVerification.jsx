@@ -25,25 +25,25 @@ const EmailVerification = ({ data, onNext }) => {
     setError("");
 
     if (!/^\d{6}$/.test(code)) {
-        setError("Invalid code format. Please enter a 6-digit code.");
-        return;
+      setError("Invalid code format. Please enter a 6-digit code.");
+      return;
     }
 
     setLoading(true);
     try {
-        const response = await Api.post("/user/verify-otp", { email: data.email, code });
-        if (response.data.verified) {
-            alert("Email verified successfully!");
-            onNext({ isEmailVerified: true });
-        } else {
-            setError("Invalid verification code.");
-        }
+      const response = await Api.post("/user/verify-otp", { email: data.email, code });
+      if (response.data.verified) {
+        alert("Email verified successfully!");
+        onNext({ isEmailVerified: true });
+      } else {
+        setError("Invalid verification code.");
+      }
     } catch (error) {
-        setError(error.response?.data?.message || "Error verifying code.");
+      setError(error.response?.data?.message || "Error verifying code.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
 
   return (
