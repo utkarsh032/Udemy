@@ -1,11 +1,11 @@
 import { connect } from "mongoose";
 import "dotenv/config";
 
-const MDBS_URL = process.env.MDBS_URL;
+const DB_URL = `${process.env.DB_URL}/Udemy`;
 
 async function dbConnection() {
     try {
-        await connect(MDBS_URL);
+        await connect(DB_URL);
         console.log("Database connected successfuly");
     } catch (error) {
         console.log(error.message);
