@@ -100,9 +100,8 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ message: "Incorrect email or password" });
         }
 
-        // const isValidUser = await argon2.verify(user.password, password);
-        const hashedPassword = await argon2.hash(password);
-        if (!hashedPassword) {
+        const isValidUser = await argon2.verify(user.password, password);
+        if (!isValidUser) {
             console.log("Incorrect password");
             return res.status(400).json({ message: "Incorrect Password" });
         }
