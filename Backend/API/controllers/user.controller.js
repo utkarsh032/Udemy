@@ -93,7 +93,6 @@ const signUpUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-
         const user = await User.findOne({ email });
 
         if (!user) {
@@ -101,11 +100,11 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ message: "Incorrect email or password" });
         }
 
-        const isValidUser = await argon2.verify(user.password, password);
-
-        if (!isValidUser) {
+        // const isValidUser = await argon2.verify(user.password, password);
+        const hashedPassword = await argon2.hash(password);
+        if (!hashedPassword) {
             console.log("Incorrect password");
-            return res.status(400).json({ message: "Incorrect email or password" });
+            return res.status(400).json({ message: "Incorrect Password" });
         }
 
         const accessToken = jwt.sign(
