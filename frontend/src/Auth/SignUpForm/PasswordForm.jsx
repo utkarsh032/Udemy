@@ -20,7 +20,7 @@ const PasswordForm = ({ data }) => {
 
     try {
       // Sending the data to the backend
-      const response = await axios.post("https://udemy-1-bd7n.onrender.com/user/signup", {
+      const response = await axios.post("https://udemy-k17u.onrender.com/user/signup", {
         email: data.email,
         name: data.fullName,
         password: password

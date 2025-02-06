@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaPlay } from "react-icons/fa";
 
 export default function RecentWatch() {
   const [myCourse, setMyCourse] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [hoveredCourse, setHoveredCourse] = useState(null); // Track hovered course ID
   const itemsPerPage = 3;
 
   const handleNextIndex = () => {
@@ -20,7 +21,7 @@ export default function RecentWatch() {
   };
 
   useEffect(() => {
-    fetch('https://udemy-1-bd7n.onrender.com/course')
+    fetch('https://udemy-k17u.onrender.com/course')
       .then((response) => response.json())
       .then((data) => setMyCourse(data))
       .catch((error) => console.log(error));
@@ -40,9 +41,29 @@ export default function RecentWatch() {
       <div className="relative">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {myCourse.slice(currentIndex, currentIndex + itemsPerPage).map((course, index) => (
-            <div key={index} className="flex gap-4 border p-2 shadow-md">
-              <div>
-                <img className="w-36 h-auto" src={course.thumbnail} alt={course.title} />
+            <div
+              key={course._id} // Use course.id as the key
+              className="flex gap-4 border p-2 shadow-md hover:shadow-lg transition-shadow duration-300 relative rounded-lg group"
+              onMouseEnter={() => setHoveredCourse(course.id)} // Set hovered course ID
+              onMouseLeave={() => setHoveredCourse(null)} // Reset hovered course ID
+            >
+              <div className="relative flex-shrink-0">
+                <img
+                  className="w-36 h-auto rounded-lg transition-transform duration-300 group-hover:scale-105"
+                  src={course.thumbnail}
+                  alt={course.title}
+                />
+                {/* Play Button Overlay */}
+                {hoveredCourse === course.id && (
+                  <Link
+                    to="/course/learn"
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg transition-opacity duration-300"
+                  >
+                    <div className="bg-white rounded-full p-3 transform scale-100 hover:scale-110 transition-transform duration-300">
+                      <FaPlay className="text-[#7e22ce] text-2xl" />
+                    </div>
+                  </Link>
+                )}
               </div>
               <div>
                 <p className="font-bold text-gray-500 text-xs">{course.subCategory}</p>
@@ -57,10 +78,9 @@ export default function RecentWatch() {
         </div>
 
         <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full">
-
           <button
             onClick={handlePrevIndex}
-            className="bg-[#a855f7] hover:bg-[#7e22ce] text-white rounded-full p-2 disabled:opacity-50"
+            className="bg-[#a855f7] hover:bg-[#7e22ce] text-white rounded-full p-2 disabled:opacity-50 transition-colors duration-300"
             disabled={currentIndex === 0}
           >
             <FaAngleLeft />
@@ -68,7 +88,7 @@ export default function RecentWatch() {
 
           <button
             onClick={handleNextIndex}
-            className="bg-[#a855f7] hover:bg-[#7e22ce] text-white rounded-full p-2 disabled:opacity-50"
+            className="bg-[#a855f7] hover:bg-[#7e22ce] text-white rounded-full p-2 disabled:opacity-50 transition-colors duration-300"
             disabled={currentIndex + itemsPerPage >= myCourse.length}
           >
             <FaAngleRight />

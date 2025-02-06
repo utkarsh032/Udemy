@@ -11,7 +11,7 @@ import path from "path";
 const app = express();
 const PORT = process.env.PORT || 4999;
 
-const frontendUrl = "https://udemy-e-learning.netlify.app";
+const frontendUrl = ["https://udemy-e-learning.netlify.app", "http://localhost:5173"];
 
 const corsOptions = {
     origin: frontendUrl,

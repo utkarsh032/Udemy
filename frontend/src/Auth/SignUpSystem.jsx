@@ -35,7 +35,7 @@ export default function SignUpSystem() {
 
         <div className='text-center'>
           <p className="text-gray-600">
-            Don't have an account?{" "}
+            Already have an account!{" "}
             <Link to="/login" className="text-[#A435F0] font-bold hover:underline">
               Login
             </Link>

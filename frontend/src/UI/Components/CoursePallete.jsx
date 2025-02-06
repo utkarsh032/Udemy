@@ -1,4 +1,4 @@
-import { FaRegHeart } from "react-icons/fa";
+import { FaExternalLinkAlt, FaRegHeart } from "react-icons/fa";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +19,7 @@ export const CoursePalette = ({
   const [loadingCart, setLoadingCart] = useState(false);
   const [loadingWishlist, setLoadingWishlist] = useState(false);
 
-  const newURL = 'https://udemy-1-bd7n.onrender.com'
+  const newURL = 'https://udemy-k17u.onrender.com/'
 
   const handleAddToCart = async (_id) => {
     setLoadingCart(true);
@@ -95,7 +95,7 @@ export const CoursePalette = ({
         <img
           src={imageUrl}
           alt={title}
-          className="w-full lg:h-48 md:h-32 object-cover "
+          className="w-full lg:h-48 md:h-32 object-cover"
         />
         <div className="absolute bottom-2 right-2 bg-white border-2 border-gray-200 rounded-full w-8 h-8 sm:w-10 sm:h-10">
           <img
@@ -108,7 +108,7 @@ export const CoursePalette = ({
           to={`/course/get-courses/${_id}`}
           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
         >
-          <FaRegCirclePlay className="text-white text-4xl sm:text-5xl drop-shadow-lg" />
+          <FaExternalLinkAlt className="text-white text-4xl sm:text-5xl drop-shadow-lg" />
         </Link>
       </div>
 
